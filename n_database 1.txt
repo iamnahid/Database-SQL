@@ -1,0 +1,49 @@
+create table AIUB
+(
+dept_id number(10),
+dept_code char(10),
+dept_name char(50)
+)
+
+insert into AIUB values
+(1,'MATH','MATHEMATICS')
+
+select * from AIUB;
+select dept_id , dept_name from AIUB;
+select * from AIUB where dept_id>3;
+select * from AIUB where dept_code='CSE';
+select * from AIUB where dept_id>=4;
+
+drop table aiub;b;
+
+
+
+
+#PRIMARY KEY
+
+
+create table AIUB
+(
+dept_id number(10),
+dept_code char(10),
+dept_name char(50),
+primary key(dept_id)
+)
+
+insert into AIUB values
+(2,'CSE','COMPUTER SCIENCE AND ENGINEERING')
+(3,'BAN','BUSSINESS ADMINISTRATION')
+(4,'IPE','INDUSTRIAL AND PRODUCTION ENGINEERING')
+(5,'ENG','ENGLISH')
+(6,'CEP','CHEMICAL ENGINEERING SCIENCE')
+(1,'MATH','MATHEMATICS')
+
+select * from AIUB;
+select dept_id , dept_name from AIUB;
+select * from AIUB where dept_id>3;
+select * from AIUB where dept_code='CSE';
+select * from AIUB where dept_id>=4;
+
+drop table aiub;
+
+describe AIUB;

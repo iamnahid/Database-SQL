@@ -1,0 +1,16 @@
+select * from emp
+select * from dept
+select * from salgrade
+drop view Dept_10 
+drop view Emp_V 
+create view Dept_10 as select empno,ename,job,sal,hiredate,comm from emp where deptno = 10
+CREATE VIEW Emp_V as select e.empno, e.ename, e.sal, d.dname, s.grade from emp e,dept d,salgrade s  
+create view Emp_of_Dhaka as select e.ename,e.empno,e.job,e.sal,e.hiredate from emp e,dept d where d.loc = 'Dhaka' and e.deptno = d.deptno
+update dept_10 set comm = 500 where nvl(comm,0) = 0
+
+DROP SEQUENCE Dept_ID_SEQ
+CREATE SEQUENCE Dept_ID_SEQ INCREMENT BY 10 START WITH 60 MAXVALUE 200 NOCACHE NOCYCLE 
+SELECT	sequence_name, max_value,increment_by, last_number FROM	user_sequences
+INSERT INTO dept(deptno, dname, loc) VALUES (dept_deptno.NEXTVAL, 'education', 'administration');
+INSERT INTO DEPT VALUES (DEPT_ID_SEQ.NEXTVAL,'EDUCATION','ADMIN')
+

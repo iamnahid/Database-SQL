@@ -1,0 +1,339 @@
+database
+
+
+create table personal_info(name varchar(30),age number(100),email varchar(30),blood_group varchar(3))
+
+
+
+create table myinfo(name varchar(20),age number(3),phone_number number(11),email varchar(15),blood_group varchar(3) )
+
+
+
+
+
+to check tables structure ::
+
+Describe tablename;
+
+
+
+how to insert data: insert into myinfo values('Adnan',24,01681774179,'talukderadnan','O+')
+
+
+
+how to check uur inserted values : select * from myinfo;
+
+
+
+create a table for student_info:
+
+create table student24_info(name varchar(25),id number (14),department varchar(5),semester number(2),CGPA number(6,2))
+
+insert into student24_info values('Adnan',14-27859-3,'CSE',1,3.5)
+
+...............................
+
+to make an information unique:(primary key)
+
+create table ST(name varchar(25),id number (14) primary key,department varchar(5),semester number(2),CGPA number(6,2))
+
+                                                                              OR
+
+create table ST(name varchar(25),id number (14), primary key(id),department varchar(5),semester number(2),CGPA number(6,2))
+
+insert into ST values('Adnan',14278593,'cse',3,3.55)
+
+insert into ST values('rahman',14289365,'cse',2,2.45)
+
+insert into ST values('tanvir',14278663,'BBA',3,2.55)
+
+insert into ST values('Adnassn',14278593,'cse',3,3.65)
+
+select * from ST;
+
+(here id has been used as unique detector so same id number cant be paste twice.)
+
+.....................
+
+how to delete data :
+
+Delete from tablename  where columname=values
+
+for eg.
+
+Delete from stud_info where id=5
+
+................
+
+how to update:
+
+update  tablename set columname where columname=values
+
+for eg:
+
+update stud_info set cgpa=3.55 where id=3 
+
+
+
+
+
+
+
+update and delete as whole code from begining:
+
+
+
+create table ST(name varchar(25),id number (14) primary key,department varchar(5),semester number(2),CGPA number(6,2))
+
+insert into ST values('Adnan',14278593,'cse',3,3.55)
+
+insert into ST values('rahman',14289365,'cse',2,2.45)
+
+insert into ST values('tanvir',14278663,'BBA',3,2.55)
+
+insert into ST values('Adnassn',14278596,'cse',3,3.65)
+
+select * from ST;
+
+delete from ST where id=14278596;
+
+update ST set cgpa=4.2 where id=14278593
+
+.............................................................(24-05-13//2nd data base lab)
+
+
+
+how to search data from an automated data table :
+
+select * from emp
+
+select empno,sal*12 from emp(can multiply for finding its multiple)
+
+if anyone want he can replace the collum name by the following wasys:
+
+
+
+select empno,sal*12"annual sal" from emp
+
+                 OR
+
+select empno,sal*12 as anuual_sal from emp
+
+
+
+to find someones specified information follow this step:
+
+
+
+select empno,ename,sal*12 as anuual_sal from emp where ename='BLAKE'
+
+
+
+FEW SIGNS:
+
+<> (not equal to)
+
+AND ,OR ,IN, BETWEEN,>,<
+
+
+
+datas can be found by comparing or putting conditions like FOR EG.
+
+
+
+select * from emp where sal>2000
+
+select empno,ename,job from emp where sal>2000
+
+
+
+how to put two conditions:
+
+select empno,ename,job,sal from emp where sal>2000 and job='MANAGER'
+
+
+
+to use multiple condition:
+
+
+
+select * from emp where job in('MANAGER','ANALYST')
+
+            OR
+
+select * from emp where job in('MANAGER','ANALYST','SALESMAN')
+
+ 
+
+
+
+HOW TO FIND VALUES BETWEEN ANY GIVEN BOUNDARY:
+
+ FOR EG.
+
+select *from emp where sal between 2000 and 3000
+
+ '''''''''''''''''''''
+
+for numbers:
+
+to find something by ascending order:
+
+select * from emp where job='MANAGER' order by sal asc 
+
+
+
+to find something by descending order:
+
+select * from emp where job='MANAGER' order by sal desc
+
+
+
+FOR ALPHABETS:
+
+to find something by ascending order:
+
+select * from emp where job='MANAGER' order by ename asc
+
+
+
+to find something by descending order:
+
+select * from emp where job='MANAGER' order by ename desc
+
+
+
+
+
+
+
+task one in the lab:
+
+{{{{{{
+
+
+
+1.List the Empno, Ename, Sal, Daily sal of all emps in the asc order of Annsal
+
+
+
+Ans:select ename,empno,sal,round(sal/30) as dayle_sale,sal*12 as annual_salary from emp order by annual_salary asc
+
+
+
+2.List the Empno, Ename, Sal of all emps working for Mgr 7369
+
+
+
+Ans:select empno,ename,sal from emp where MGR=7369
+
+
+
+3.Display all the details of the empswhose Comm. Is more than their Salary?
+
+ 
+
+Ans:select * from emp where COMM>sal 
+
+
+
+4.List the emps who does not belong to Deptno 20 
+
+
+
+Ans:select * from emp where DEPTNO<>20
+
+
+
+5.List the empno,ename,sal,deptno of the dept 10 emps in the ascending order of salary.
+
+
+
+Ans:select empno,ename,sal,deptno from emp where DEPTNO=10 order by sal asc
+
+
+
+6.List the emps whose annual sal ranging from 23000 to 40000
+
+ 
+
+Ans: select * from emp where sal*12 between 23000 and 40000
+
+
+
+7.List the emps working under the mgrs 7369,7890,7654,7900
+
+
+
+Ans:select * from emp where MGR in(7369,7890,7654,7900)
+
+
+
+8.List the emps who are either ‘CLERK’ or ‘ANALYST’ in the Desc order 
+
+
+
+Ans:select * from emp where job in('CLERK','ANALYST') order by job desc
+
+
+
+9.Find the analysts and managers (empno,ename,job,deptno) who’s salary is between 2000to 4000.
+
+
+
+Ans:select empno,ename,job,deptno from emp where job in('ANALYSTS','MANAGER')and sal between 2000 and 4000
+
+
+
+10.Find the employees (empno,ename,hiredate,sal) who joned after 1982 and whose salary is greater than 1700 order by hiredate
+
+
+
+Ans:select empno,ename,hiredate,sal from emp where HIREDATE>'31-jan-1982' and sal>1700 order by hiredate 
+
+}}}}}
+
+
+
+
+
+
+
+2nd lab practice:
+
+
+
+1)Display all the Employees whose name  start with A
+
+ans:select * from emp where ENAME like 'A%'
+
+
+
+2)Display all the Employees whose name  start with B and end with E
+
+ans:select * from emp where ENAME like 'B%E'
+
+
+
+3)Display all the Employees whose name’s 2nd character is L and 2nd last character is K
+
+
+
+ans:select * from emp where ENAME like '_B%E_'
+
+
+
+4)Display all the managers whose name not like start with A & S
+
+
+
+Ans:select * from emp where ENAME not like 'A&S'
+
+
+
+5)Display all the Employees whose name  who’s job start with S
+
+
+
+ans:select ename from emp where job  like 'S%'
+

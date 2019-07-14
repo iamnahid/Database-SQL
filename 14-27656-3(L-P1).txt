@@ -1,0 +1,33 @@
+01. SELECT MAX(BALANCE),MIN(BALANCE) FROM BANK_INFO WHERE BRANCH_NAME='MOHAKHALI'
+
+02. SELECT SUM(BALANCE) FROM BANK_INFO GROUP BY BRANCH_NAME
+
+03. SELECT CUSTOMER_NAME,ACCOUNT_NO,BALANCE FROM BANK_INFO WHERE BALANCE=(SELECT MAX(BALANCE) FROM BANK_INFO) 
+
+04. SELECT ACCOUNT_NO FROM BANK_INFO WHERE BRANCH_NAME='Zindabazar'
+
+05. SELECT CUSTOMER_NAME,CUSTOMER_CITY FROM CUSTOMER WHERE CUSTOMER_NAME IN(SELECT CUSTOMER_NAME FROM BORROWER WHERE LOAN_NUMBER IN(SELECT LOAN_NUMBER FROM LOAN))
+
+06. select account_number from account where balance between 700 and 900
+
+07. select customer_name,customer_city from customer where customer_name in(select customer_name from borrower where loan_number in(select loan_number from loan where branch_name in'Perryridge'))
+
+08. SELECT CUSTOMER_NAME FROM CUSTOMER WHERE CUSTOMER_STREET LIKE '%Hill'
+
+09. SELECT CUSTOMER_NAME,CUSTOMER_CITY FROM CUSTOMER WHERE CUSTOMER_NAME IN(SELECT CUSTOMER_NAME FROM BORROWER WHERE LOAN_NUMBER IN(SELECT LOAN_NUMBER FROM LOAN))
+
+10. select branch_name from branch where assets  > some (select assets from branch where branch_city in'Brooklyn')
+
+11. select branch_name from branch where assets  > all (select assets from branch where branch_city in'Brooklyn')
+
+12. select branch_name,avg(balance) from account group by branch_name having count(*)>=1
+
+13. select customer_name from depositor where account_number in(select account_number from account)
+
+14. select round(avg(balance),5) from account 
+
+15. select branch_name from account group by branch_name having avg(balance) > 700
+
+16.select count(*) from customer
+
+17. SELECT CUSTOMER_NAME FROM CUSTOMER WHERE CUSTOMER_NAME LIKE 'C%'

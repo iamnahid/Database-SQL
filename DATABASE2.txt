@@ -1,0 +1,103 @@
+select * from emp where sal+nvl(comm,0)>2000
+select * from emp where hiredate=(select max(hiredate) from emp) or hiredate=(select min(hiredate) from emp)
+select * from emp where deptno in (10,20) and sal not between 2500 and 5000
+select job,max(sal) from emp group by job
+select job,avg(sal) from emp where empno not between 7788 and 7790 group by job
+select deptno,sum(sal),avg(sal) from emp where job in ('MANAGERS','ANALYST') group by deptno having avg(sal)>=3000
+select deptno,count(ename) from emp group by deptno having count(ename)>3
+select sal from emp where ename='SMITH'
+
+select * from emp where deptno=(select deptno from dept where loc!='DALLAS'and DNAME='SALES')
+select deptno,loc from dept where deptno=(select deptno from emp where mgr=(select empno from emp where ename='CLARK'))
+select * from emp,dept where job='MANAGER' 
+select * from emp where deptno=(select deptno from dept where loc='DALLAS')
+select * from emp where deptno=(select deptno from emp where ename='SCOTT')
+select * from emp where hiredate<(select hiredate from emp where empno=mgr)
+select * from emp where sal<(select sal from emp where empno=mgr)
+select * from emp group by sal
+select * from emp where sal=(select sal from emp where ename='SMITH')
+select * from emp,salgrade
+select * from emp 
+*************************************************************************
+database lab 7.6.15
+
+LAB PERFORMANCE
+1.	Find out the employees who are working in CHICAGO and DALLAS.
+2.	List the emps who’s Jobs are same as ALLEN.
+3.	List the emps  with departmental information Whose Jobs are same as MILLER or Sal is more than ALLEN .
+4.	Display the employee name along with his joining date that joined as a third number employee of the company.
+5.	Find the highest paid employee of sales department. 
+6.	List the emps who are not working in DALLAS  and gets a commission. 
+7.	List the names of job. Where atleast 3 are working in that job.
+8.	Select department name & location of all the employees working for KING.
+9.	Find the total annual sal to distribute job wise in the year 1982. 
+10.	List the highest paid emp working under king.
+
+
+
+
+ans=
+1.select emp.*,dept.loc from emp,dept where dept.loc in ('CHICAGO','DALLAS') and emp.deptno=dept.deptno
+
+2.select * from emp where job=(select job from emp where ename='ALLEN')
+3.select emp.*,dept.* from emp,dept where job=(select job from emp where ename='MILLER') or sal>(select sal from emp where ename='ALLEN')
+4.select ename,hiredate from emp where hiredate=(select min(hiredate) from emp where hiredate>(select min(hiredate) from emp where hiredate>(select min(hiredate) from emp)))
+5.select * from emp where sal=(select max(sal) from emp where deptno=(select deptno from dept where dname='SALES'))
+6.select emp.*,dept.loc from emp,dept where dept.loc not in ('DALLAS') and nvl(emp.comm,0)>0 and dept.deptno=emp.deptno
+
+7.select job,count(job) from emp group by job having count(job)>2
+8.select emp.ename,dept.dname,dept.loc,emp.mgr from emp,dept where emp.mgr=(select emp.empno from emp where emp.ename='KING') and emp.deptno=dept.deptno
+9.select sum(sal*12)"Total Annual Sal",job from emp where to_char(hiredate,'YYYY')=1982 group by job
+10.select * from emp where sal=(select max(sal) from emp where mgr=(select emp.empno from emp where emp.ename='KING'))
+ *****************************************************************************************************
+MID-TERM AR POR A....AI GOLA
+
+
+
+Joining
+
+
+1)	Display all the managers & clerks who work in Accounts and Marketing departments.
+
+2)	Display all the salesmen who are not located at DALLAS.
+
+3)	Select department name & location of all the employees working for CLARK.
+
+4)	Select all the departmental information for all the managers
+
+5)	Select all the employees who work in DALLAS.
+
+6)	Get all the employees who work in the same departments as of SCOTT
+
+7)	Display all the employees who have joined before their managers.
+
+8)	List all the employees who are earning more than their managers.
+
+9)	Fetch all the employees who are earning same salaries.
+
+10)	Select all the employees who are earning same as SMITH.
+
+
+
+
+
+
+1.select * from emp e,dept d where  e.deptno=d.deptno and e.job in('MANAGER','CLERK') AND d.DNAME IN('ACCOUNTING','SALES')
+2.select e.empno,e.ename,e.job,e.deptno from emp e ,dept d where e.deptno=d.deptno  and e.job='SALESMAN' AND d.LOC<>'DALLAS'
+3.select e.ename,d.dname,d.loc from emp e,dept d where e.deptno=d.deptno and e.empno=(select e.mgr from emp e where e.ename='CLARK')
+4.select  e.job,d.deptno,d.dname,d.loc from emp e,dept d  where e.deptno=d.deptno and e.job='MANAGER'
+5.select e.*,d.loc from emp e,dept d where e.deptno=d.deptno and d.loc='DALLAS'
+6.
+
+[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+select * from emp,dept where emp.job in ('MANAGER','CLERK') and dept.dname in ('SALES','ACCOUNTING') and emp.deptno=dept.deptno
+select * from emp,dept where emp.job='SALESMAN' and dept.loc not in ('DALLAS') and emp.deptno=dept.deptno
+select e.ename,dept.dname,dept.loc from dept,emp e,emp m where e.mgr=m.empno and m.ename='CLARK' and e.deptno=dept.deptno
+select * from emp,dept where emp.job='MANAGER' and emp.deptno=dept.deptno
+select * from emp,dept where dept.loc in ('DALLAS') and emp.deptno=dept.deptno
+select * from emp where deptno=(select deptno from emp where ename='SCOTT') 
+select e.ename,e.empno,e.hiredate,m.hiredate"MGR HIREDATE" from emp e,emp m where e.hiredate<m.hiredate and e.mgr=m.empno
+select e.ename,e.sal,m.sal"MGR SAL" from emp e,emp m where e.sal>m.sal and e.mgr=m.empno
+9.
+select * from emp where sal=(select sal from emp where ename='SMITH')
+
